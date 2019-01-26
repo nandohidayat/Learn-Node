@@ -18,10 +18,10 @@ exports.createStore = async (req, res) => {
     "success",
     `Successfully Created ${store.name}. Care to leave a review?`
   );
-  console.log(store);
   res.redirect(`/store/${store.slug}`);
 };
 
-exports.getStores = (req, res) => {
-  res.render("store", { title: "Store" });
+exports.getStores = async (req, res) => {
+  const stores = await Store.find();
+  res.render("stores", { title: "Stores", stores });
 };
